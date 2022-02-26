@@ -77,8 +77,4 @@ backToTopBtn.addEventListener('click', () => {
 })
 
 // ===== TO DO
-// last 25 past launches, load more on slide **
-// - convert to all GSAP animations
-//  mobile testing
-// check lighthouse report
 // Mark up all comments!!
