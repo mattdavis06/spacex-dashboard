@@ -1,18 +1,24 @@
+// ---------------
+// Global Variables
 let nextLaunchData = {}
 let rocketName = ''
 let launchPadName = ''
 let allCrewData = []
 let crewMembers = []
-
 let upcomingLaunchData = []
 let pastLaunchData = []
 
+// ---------------
+// URLs
 const nextDataURL = 'https://api.spacexdata.com/v5/launches/next'
 const upcomingDataURL = 'https://api.spacexdata.com/v5/launches/upcoming'
 const pastDataURL = 'https://api.spacexdata.com/v5/launches/past'
 
+// ----------------------
+// URL Requests & Loading Spinner
 const loadingSpinner = document.querySelector('.loading-spinner')
 
+// Gets Data & Calls Functions
 async function getNextData() {
   const res = await fetch(nextDataURL)
   const nextData = await res.json()
@@ -29,6 +35,7 @@ async function getNextData() {
   }, 1000)
 }
 
+// Gets Rocket Data
 async function getRocketData(nextLaunchData) {
   const res = await fetch(
     `https://api.spacexdata.com/v4/rockets/${nextLaunchData.rocket}`
@@ -37,6 +44,7 @@ async function getRocketData(nextLaunchData) {
   rocketName = rocketData.name
 }
 
+// Gets Launchpad Data
 async function getLaunchData(nextLaunchData) {
   const res = await fetch(
     `https://api.spacexdata.com/v4/launchpads/${nextLaunchData.launchpad}`
@@ -45,6 +53,7 @@ async function getLaunchData(nextLaunchData) {
   launchPadName = launchPadData.name
 }
 
+// Gets Crew Data
 async function getCrewData(nextLaunchData) {
   const res = await fetch(`https://api.spacexdata.com/v4/crew`)
   const crewData = await res.json()
@@ -68,6 +77,7 @@ async function getCrewData(nextLaunchData) {
 
 getNextData()
 
+// Get Upcoming Launch Data
 async function getUpcomingData() {
   const res = await fetch(upcomingDataURL)
   const upcomingData = await res.json()
@@ -78,6 +88,7 @@ async function getUpcomingData() {
 }
 getUpcomingData()
 
+// Gets Past Launch Data
 async function getPastData() {
   const res = await fetch(pastDataURL)
   const pastData = await res.json()
@@ -87,6 +98,7 @@ async function getPastData() {
 }
 getPastData()
 
+// ----------------------------------------------------------------
 // Gets Current Date/Time, pass in date/time and returns each value
 function getTimeRemaining(time) {
   const total = Date.parse(time) - Date.parse(new Date())
@@ -132,6 +144,8 @@ function createNextLaunchCountdown(nextLaunchData) {
   }, 1000)
 }
 
+// ------------------------
+// Creates Next Launch Cards
 function createNextLaunchCard(nextLaunchData) {
   const nextLaunchEl = document.querySelector('.next-launch-wrapper')
   const nextLaunchCard = document.createElement('div')
@@ -236,12 +250,15 @@ function createNextLaunchCard(nextLaunchData) {
     `
   nextLaunchEl.append(nextLaunchDetailsEl)
 
+  // Creates Mission Crew Details & Patch
   const missionCrewProfilesEl = document.querySelector('.mission-crew-profiles')
   const nextMissionPatch = document.querySelector('.next-launch-wrapper img')
   createCrewEls(missionCrewProfilesEl)
   nextMissionImgPatchModal(nextMissionPatch)
 }
 
+// ----------------------------------------------------
+// Presskit, YT & Wiki Function Check & Insert into DOM
 function presskitLink(link) {
   if (link === null) {
     return `<p>No link<p/>`
@@ -266,6 +283,8 @@ function wikiLink(link) {
   }
 }
 
+// --------------------
+// Creates Crew Element
 function createCrewEls(missionCrewProfilesEl) {
   if (crewMembers.length === 0) {
     const missionNoCrewEl = document.createElement('p')
@@ -295,6 +314,8 @@ function createCrewEls(missionCrewProfilesEl) {
   }
 }
 
+// -------------------------
+// Creates Next Mission Patch
 function nextMissionImgPatchModal(nextMissionPatch) {
   const modal = document.querySelector('.modal')
   const modalImg = document.querySelector('.modal img')
@@ -313,6 +334,8 @@ function nextMissionImgPatchModal(nextMissionPatch) {
   })
 }
 
+// -----------------------------
+// Creates Upcoming Launch Cards
 function createUpcomingLaunchCards(upcomingLaunchData) {
   const upcomingLaunchWrapper = document.querySelector(
     '.upcoming-launch-wrapper'
@@ -388,6 +411,7 @@ function createUpcomingLaunchCards(upcomingLaunchData) {
     upcomingLaunchWrapper.firstElementChild.append(upcomingLaunchCard)
   })
 
+  // Adds drop down feature for cards
   const upcomingCards = document.querySelectorAll('.upcoming-card')
   const upcomingLaunchFirstCardArrow =
     document.querySelector('.card-expand-arrow')
@@ -399,11 +423,14 @@ function createUpcomingLaunchCards(upcomingLaunchData) {
 
   expandUpcomingCards()
 
+  // GSAP Animation
   upcomingCards.forEach((card) => {
     tl.fromTo(card, { y: 2000 }, { y: 0 }, '+1')
   })
 }
 
+// -------------------------
+// Creates Past Launch Cards
 function createPastLaunchCards(pastLaunchData) {
   const pastLaunchWrapper = document.querySelector('.past-launch-wrapper')
 
@@ -481,12 +508,15 @@ function createPastLaunchCards(pastLaunchData) {
 
   expandPastCards()
 
+  // GSAP Animation
   const pastCards = document.querySelectorAll('.past-card')
   pastCards.forEach((card) => {
     tl.fromTo(card, { x: 1000 }, { x: 0 }, '+1')
   })
 }
 
+// -------------------------
+// Check Mission Sucess FUNC
 function missionSuccess(launchSuccess) {
   if (launchSuccess === false) {
     return '<h4 style="color: rgba(255, 0, 0, 0.7);">No<h4/>'
@@ -495,6 +525,8 @@ function missionSuccess(launchSuccess) {
   }
 }
 
+// ---------------------------
+// Expand Upcoming Card Detail
 function expandUpcomingCards() {
   const upcomingCardExpandArrows = document.querySelectorAll(
     '.card-expand-arrow.upcoming'
@@ -508,6 +540,7 @@ function expandUpcomingCards() {
   })
 }
 
+// Removes Card Details 'Active' Class
 function removeActiveExpandUpcomingCardArrows(upcomingCardExpandArrows) {
   upcomingCardExpandArrows.forEach((arrow) => {
     arrow.classList.remove('active')
@@ -515,6 +548,8 @@ function removeActiveExpandUpcomingCardArrows(upcomingCardExpandArrows) {
   })
 }
 
+// -----------------------
+// Expand Past Card Detail
 function expandPastCards() {
   const pastCardExpandArrows = document.querySelectorAll(
     '.card-expand-arrow.past'
@@ -527,7 +562,7 @@ function expandPastCards() {
     })
   })
 }
-
+// Removes Card Details 'Active' Class
 function removeActiveExpandPastCardArrows(pastCardExpandArrows) {
   pastCardExpandArrows.forEach((arrow) => {
     arrow.classList.remove('active')
@@ -535,6 +570,8 @@ function removeActiveExpandPastCardArrows(pastCardExpandArrows) {
   })
 }
 
+// ---------------------------------------------------------
+// Horizontal Scroll & Grab for Past/Future Card Wrapper Div
 let mouseDown = false
 let startX
 let scrollLeft

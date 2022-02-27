@@ -1,5 +1,7 @@
+// URL
 const rocketsDataURL = 'https://api.spacexdata.com/v4/rockets'
 
+// Get Rocket Data and calls createRocketDataObj
 function getRocketsData() {
   fetch(rocketsDataURL)
     .then((res) => {
@@ -19,6 +21,8 @@ function getRocketsData() {
 
 getRocketsData()
 
+// ---------------------
+// Creates Rocket Object
 let rockets = []
 
 function createRocketDataObj(rocketData) {
@@ -58,6 +62,8 @@ function createRocketDataObj(rocketData) {
   }
 }
 
+// ---------------------
+// Creates Rocket Element
 function createRocketEls(rockets) {
   const rocketCarouselWrapperEl = document.querySelector(
     '.rockets-carousel-wrapper'
@@ -196,6 +202,8 @@ function createRocketEls(rockets) {
   rocketCarouselWrapperEl.append(card)
 }
 
+// --------------
+// Rocket Carousel
 let carouselIdx = 0
 
 function rocketCarousel(carouselIdx) {
@@ -237,7 +245,8 @@ setTimeout(() => {
   rocketCarousel(carouselIdx)
 }, 250)
 
-// ----- Animations
+// ---------------
+// GSAP Animations
 const tl2 = gsap.timeline({
   defaults: {
     duration: 1,

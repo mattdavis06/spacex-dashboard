@@ -75,6 +75,3 @@ backToTopBtn.addEventListener('click', () => {
     scrollTo: { y: '#header' },
   })
 })
-
-// ===== TO DO
-// Mark up all comments!!
