@@ -1594,8 +1594,8 @@ nav .nav--mobile-link.active a:after {
     text-align: center;
   }
 
-  .next-launch-wrapper .mission-details .mission-patch {
-    display: none;
+  .mission-details:nth-of-type(2) {
+    flex-direction: column;
   }
 
   .rocket-details-wrapper {
