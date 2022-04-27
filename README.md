@@ -2,7 +2,7 @@
 
 This is a personal project that I created using HTML, CSS and Vanilla JS, using the open source [SpaceX-API](https://github.com/r-spacex/SpaceX-API) on GitHub.
 
-Live Site: [SpaceX Dashboard](https://github.com/r-spacex/SpaceX-API)
+Live Site: [SpaceX Dashboard](https://spacex-live-dashboard.netlify.app/)
 
 
 
