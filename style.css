@@ -429,23 +429,20 @@ nav .nav--mobile-link.active a:after {
 .nav-mobile-links {
 	position: fixed;
 	width: 100%;
-	min-height: 100vh;
-	height: -webkit-fill-available;
-	height: -moz-available;
-	height: fill-available;
-	transform: translateX(-100%);
+	top: 0;
+	left: -100%;
 	z-index: 100;
 	background: var(--accent-color);
-	-webkit-transition: bottom 0.5s linear;
-	-o-transition: bottom 0.5s linear;
-	transition: bottom 0.5s linear;
+	-webkit-transition: left 0.5s linear;
+	-o-transition: left 0.5s linear;
+	transition: left 0.5s linear;
 }
 
 .nav-mobile-links.active {
-	transform: translateX(0);
-	-webkit-transition: bottom 0.5s linear;
-	-o-transition: bottom 0.5s linear;
-	transition: bottom 0.5s linear;
+	left: 0;
+	-webkit-transition: left 0.5s linear;
+	-o-transition: left 0.5s linear;
+	transition: left 0.5s linear;
 }
 
 .nav-mobile-links ul {
